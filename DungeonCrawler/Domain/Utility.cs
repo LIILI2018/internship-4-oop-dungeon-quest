@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace DungeonCrawler.Domain {
 	internal class Utility {
-		//
 		public static int RandomInt(int low, int high) {
 			return new Random().Next(low, high);
 		}

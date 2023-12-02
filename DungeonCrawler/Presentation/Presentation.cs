@@ -105,6 +105,5 @@ namespace DungeonCrawler.Presentation {
 			Console.Clear();
 			return y;
 		}
-
 	}
 }

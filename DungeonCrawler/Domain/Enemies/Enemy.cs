@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace DungeonCrawler.Domain.Enemies {
 	public abstract class Enemy {
-		protected double HitPoints { get; set; }
+		public double HitPoints { get; set; }
 		public double ExperienceWorth { get; set; }
-		protected double Damage { get; set; }
+		public double Damage { get; set; }
 
 		public Enemy(double HP, double XPW, double damage) {
 			HitPoints = HP;
@@ -20,6 +20,7 @@ namespace DungeonCrawler.Domain.Enemies {
 		}
 
 		public virtual void AttackPlayer() { }
+
 		public bool IsAlive() {
 			if (HitPoints > 0) return true;
 			else return false;

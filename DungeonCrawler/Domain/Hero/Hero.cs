@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DungeonCrawler.Domain.Enemies;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,9 +23,7 @@ namespace DungeonCrawler.Domain.Hero {
 			DamageIncrease = dmgIncrease;
 		}
 
-		public virtual void AttackEnemy(Enemy enemy, double Double) {
-			enemy.Hitpoints -= Damage;
-		}
+		public virtual void AttackEnemy(Enemy enemy) {}
 		public virtual void LevelUp(double HPIncrease, double DamageIncrease) {
 			if (ExperiencePoints > 100) {
 				HitPoints += HPIncrease;

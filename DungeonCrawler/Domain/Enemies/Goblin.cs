@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DungeonCrawler.Domain.Hero;
 
 namespace DungeonCrawler.Domain.Enemies {
-	class Goblin : Enemy {
-		public Goblin() : base(Utility.RandomInt(15, 20), 40, Utility.RandomInt(30, 40)) { }
+	public class Goblin : Enemy {
+		public Goblin() : base("Goblin", Utility.RandomInt(15, 20), 40, Utility.RandomInt(30, 40)) { }
+		public override void AttackPlayer(Hero.Hero hero, List<Enemy> enemies) {
+			hero.HitPoints -= Damage;
+		}
 	}
 }

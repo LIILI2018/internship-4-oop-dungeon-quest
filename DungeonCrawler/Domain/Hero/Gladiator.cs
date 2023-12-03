@@ -8,7 +8,7 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace DungeonCrawler.Domain.Hero {
 	public class Gladiator : Hero {
-		public Gladiator() : base(Utility.RandomInt(90, 100), Utility.RandomInt(10, 15), 10, 10) { }
+		public Gladiator() : base("Gladiator", Utility.RandomInt(90, 100), Utility.RandomInt(10, 15), 10, 10) { }
 
 		public override void AttackEnemy(Enemy enemy) {
 			enemy.HitPoints -= Damage;

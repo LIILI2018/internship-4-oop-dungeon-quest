@@ -9,5 +9,8 @@ namespace DungeonCrawler.Domain {
 		public static int RandomInt(int low, int high) {
 			return new Random().Next(low, high);
 		}
+		public static int RandomInt() {
+			return new Random().Next(1, 101);
+		}
 	}
 }

@@ -1,32 +1,31 @@
 ﻿using DungeonCrawler.Domain.Enemies;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DungeonCrawler.Domain.Hero {
 	public abstract class Hero {
-		protected double HitPoints { get; set; }
+		public string Name { get; set; }
+		public double HitPoints { get; set; }
+		public double MaxHitPoints { get; set; }
 		public double ExperiencePoints { get; set; }
-		protected double Damage { get; set; }
-		protected double HPIncrease { get; set; }
-		protected double DamageIncrease { get; set; }
+		public double Damage { get; set; }
+		public double MaxHPIncrease { get; set; }
+		public double DamageIncrease { get; set; }
 
 
 
-		internal Hero(double hp, double damage, double hpIncrease, double dmgIncrease) {
-			HitPoints = hp;
+		public Hero(string name,double hp, double damage, double hpIncrease, double dmgIncrease) {
+			Name = name;
+			MaxHitPoints = hp;
 			ExperiencePoints = 0;
 			Damage = damage;
-			HPIncrease = hpIncrease;
+			MaxHPIncrease = hpIncrease;
 			DamageIncrease = dmgIncrease;
+			HitPoints = hp;
 		}
 
 		public virtual void AttackEnemy(Enemy enemy) {}
-		public virtual void LevelUp(double HPIncrease, double DamageIncrease) {
+		public void LevelUp() {
 			if (ExperiencePoints > 100) {
-				HitPoints += HPIncrease;
+				MaxHitPoints += MaxHPIncrease;
 				Damage += DamageIncrease;
 				ExperiencePoints -= 100;
 			}
@@ -35,6 +34,17 @@ namespace DungeonCrawler.Domain.Hero {
 		public bool IsAlive() {
 			if (HitPoints > 0) return true;
 			else return false;
+		}
+		public void Heal() {
+			HitPoints += MaxHitPoints * 0.25;
+			if (HitPoints > MaxHitPoints) {
+				HitPoints = MaxHitPoints;
+			}
+		}
+		public void Progress(Enemy enemy) {
+			ExperiencePoints += enemy.ExperienceWorth;
+			LevelUp();
+			Heal();
 		}
 	}
 }

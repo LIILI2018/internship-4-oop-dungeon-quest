@@ -20,8 +20,9 @@ namespace DungeonCrawler.Domain.Enemies {
 				hero.HitPoints -= Damage;
 			}
 		}
-		public void CreateNewMonsters(List<Enemy> enemies) {
-			enemies.Add()
+		public override void EnemyDeath(List<Enemy> enemies) {
+			enemies.Add(Enemy.CreateEnemy());
+			enemies.Add(Enemy.CreateEnemy());
 		}
 	}
 }

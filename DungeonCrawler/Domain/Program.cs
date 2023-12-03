@@ -6,31 +6,35 @@ using DungeonCrawler.Presentation;
 var hero = Presentation.ChooseHero();
 
 var enemies = new List<Enemy>();
+
 for (int i = 0; i < 3; i++) {
 	enemies.Add(Enemy.CreateEnemy());
 }
-foreach (Enemy enemy in enemies) { Console.WriteLine(enemy.GetType()); }
+foreach (Enemy enemy in enemies) { Console.WriteLine(enemy.Name); }
 
 StartGame();
 
 void StartGame() { 
 	for (int i = 0; i < enemies.Count; i++) {
+
 		while (enemies[i].IsAlive() && hero.IsAlive()) {
 			Console.Clear();
 			Presentation.WriteSituation(hero, enemies[i]);
-			ExecuteAttack(hero, enemies[i]);
+			ExecuteAttack(hero, enemies[i], enemies);
 		}
-		hero.Progress(enemies[i]);
+		if (hero.IsAlive()) { 
+			hero.Progress(enemies, i);
+		}
 	}
 }
-static void ExecuteAttack( Hero hero, Enemy enemy) {
+static void ExecuteAttack( Hero hero, Enemy enemy, List<Enemy> enemies) {
 
 	var enemyAttack = Enemy.ChooseAttack();
 	Console.WriteLine(enemyAttack + "\n");
 	var playerAttack = Presentation.ChooseAttack();
 
 	if (playerAttack == 1 && enemyAttack == 3) {
-		enemy.AttackPlayer(hero);
+		enemy.AttackPlayer(hero, enemies);
 		Inputs.Wait("You attack enemy");
 	}
 	else if (playerAttack == 3 && enemyAttack == 1) {
@@ -44,7 +48,7 @@ static void ExecuteAttack( Hero hero, Enemy enemy) {
 
 	}
 	else if (playerAttack > enemyAttack) {
-		enemy.AttackPlayer(hero);
+		enemy.AttackPlayer(hero, enemies);
 		Inputs.Wait("You attack enemy");
 
 	}

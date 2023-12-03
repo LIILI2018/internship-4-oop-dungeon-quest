@@ -41,10 +41,11 @@ namespace DungeonCrawler.Domain.Hero {
 				HitPoints = MaxHitPoints;
 			}
 		}
-		public void Progress(Enemy enemy) {
-			ExperiencePoints += enemy.ExperienceWorth;
+		public void Progress(List<Enemy> enemies,int i) {
+			ExperiencePoints += enemies[i].ExperienceWorth;
 			LevelUp();
 			Heal();
+			enemies[i].EnemyDeath(enemies);
 		}
 	}
 }

@@ -17,11 +17,10 @@ namespace DungeonCrawler.Domain.Enemies {
 			ExperienceWorth = XPW;
 			Damage = damage;
 		}
-		public static int ChooseAttack() {
-			return Utility.RandomInt(1, 4);
-		}
-		public virtual void AttackPlayer(Hero.Hero hero1, List<Enemy> enemies) { }
 
+
+
+		public virtual void AttackPlayer(Hero.Hero hero1, List<Enemy> enemies) { }
 		public bool IsAlive() {
 			if (HitPoints > 0) return true;
 			else return false;
@@ -37,6 +36,11 @@ namespace DungeonCrawler.Domain.Enemies {
 			else{
 				return new Witch();
 			}
+		}		
+		public static int ChooseAttack() {
+			return Utility.RandomInt(1, 4);
 		}
+		public virtual void EnemyDeath(List<Enemy> enemies) {}
+
 	}
 }

@@ -8,31 +8,27 @@ namespace DungeonCrawler.Domain.Hero {
         public double MaxHitPoints { get; set; }
         public double ExperiencePoints { get; set; }
         public double Damage { get; set; }
-        public double MaxHPIncrease { get; set; }
-        public double DamageIncrease { get; set; }
-
-
+        protected double _maxHPIncrease { get; set; }
+        protected double _damageIncrease { get; set; }
 
         public Hero(string name, double hp, double damage, double hpIncrease, double dmgIncrease) {
             Name = name;
             MaxHitPoints = hp;
             ExperiencePoints = 0;
             Damage = damage;
-            MaxHPIncrease = hpIncrease;
-            DamageIncrease = dmgIncrease;
+            _maxHPIncrease = hpIncrease;
+            _damageIncrease = dmgIncrease;
             HitPoints = hp;
         }
 
-        //
         public virtual string AttackEnemy(Enemy enemy) { return ""; }
 
-        //+ +
-        public virtual void LevelUp() {
+        protected virtual void LevelUp() {
             if (ExperiencePoints >= 100) {
-                MaxHitPoints += MaxHPIncrease;
-                Damage += DamageIncrease;
+                MaxHitPoints += _maxHPIncrease;
+                Damage += _damageIncrease;
                 ExperiencePoints -= 100;
-                Inputs.Wait($"Postigao si novi level\nHP ti se povečao za {MaxHPIncrease}\nDamage ti se povečao za {DamageIncrease}");
+                Inputs.Wait($"Postigao si novi level\nHP ti se povečao za {_maxHPIncrease}\nDamage ti se povečao za {_damageIncrease}");
             }
         }
 
@@ -40,13 +36,14 @@ namespace DungeonCrawler.Domain.Hero {
             if (HitPoints > 0) return true;
             else return false;
         }
-        public virtual void Heal() {
-            HitPoints += MaxHitPoints * 0.25;
+
+        protected virtual void Heal() {
+            HitPoints += MaxHitPoints * 0.4;
             if (HitPoints > MaxHitPoints) {
                 HitPoints = MaxHitPoints;
             }
         }
-        //+ +
+
         public void Progress(List<Enemy> enemies, int i) {
             ExperiencePoints += enemies[i].ExperienceWorth;
             LevelUp();

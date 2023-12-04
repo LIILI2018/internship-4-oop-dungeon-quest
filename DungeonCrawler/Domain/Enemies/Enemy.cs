@@ -1,9 +1,4 @@
-﻿using DungeonCrawler.Domain.Hero;
-using DungeonCrawler.Presentation;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DungeonCrawler.Presentation;
 
 namespace DungeonCrawler.Domain.Enemies {
     public abstract class Enemy {
@@ -19,15 +14,9 @@ namespace DungeonCrawler.Domain.Enemies {
             Damage = damage;
         }
 
-
-
         public virtual string AttackPlayer(Hero.Hero hero1, List<Enemy> enemies) { return ""; }
-        public bool IsAlive() {
-            if (HitPoints > 0) return true;
-            else return false;
-        }
         public static Enemy CreateEnemy() {
-            var x = Utility.RandomInt(0, 101);
+            var x = Utility.RandomInt();
             if (x < 50) {
                 return new Goblin();
             }

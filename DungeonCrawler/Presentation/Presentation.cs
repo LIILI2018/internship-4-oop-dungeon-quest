@@ -3,7 +3,6 @@ using DungeonCrawler.Domain.Hero;
 
 namespace DungeonCrawler.Presentation {
     public static class Presentation {
-        //+ +
         public static Hero ChooseHero() {
             Console.WriteLine("Choose hero");
             var x = Inputs.OptionInput(["1 - Gladiator", "2 - Enchanter", "3 - Marksman"]);
@@ -23,7 +22,6 @@ namespace DungeonCrawler.Presentation {
             }
         }
 
-        //+ +
         public static void WriteEnemies(List<Enemy> enemies) {
             Console.WriteLine("Neprijatelji s kojima ćeš se boriti: ");
             var i = 1;
@@ -33,7 +31,6 @@ namespace DungeonCrawler.Presentation {
             Inputs.Wait("");
         }
 
-        //+ +
         public static void WriteSituation(Hero hero, Enemy enemy) {
             Console.WriteLine($"{hero.Name} \nHitpoints: {hero.HitPoints}/{hero.MaxHitPoints} \nDamage: {hero.Damage}\nExperience: {hero.ExperiencePoints}/100");
             Console.WriteLine();
@@ -41,18 +38,14 @@ namespace DungeonCrawler.Presentation {
             Console.WriteLine();
         }
 
-        //+ +
         public static int ChooseAttack() {
             return Inputs.OptionInput(["1 - Direktan napad", "2 - Napad sa strane", "3 - Protunapad"]);
         }
 
-        //
         public static void DeathDialogue() {
             Inputs.Wait("Umro si");
         }
 
-        //
         public static void WinDialogue() { Console.WriteLine("Pobijedio si"); }
-        //+ +
     }
 }

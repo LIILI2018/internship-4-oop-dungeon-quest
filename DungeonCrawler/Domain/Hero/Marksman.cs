@@ -1,27 +1,21 @@
 ﻿using DungeonCrawler.Domain.Enemies;
-using DungeonCrawler.Presentation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DungeonCrawler.Domain.Hero {
     public class Marksman : Hero {
-        public double CritcalChance { get; set; } = 20;
-        public double StunChance { get; set; } = 30;
-        public Marksman() : base("Mušketir", Utility.RandomInt(45, 55), Utility.RandomInt(20, 30), 10, 10) { }
+        private double _critcalChance { get; set; } = 20;
+        private double _stunChance { get; set; } = 30;
+        public Marksman() : base("Mušketir", Utility.RandomInt(90, 111), Utility.RandomInt(30, 50), 30, 15) { }
 
         public override string AttackEnemy(Enemy enemy) {
             var x = Utility.RandomInt();
-            if (x < CritcalChance) {
+            if (x < _critcalChance) {
                 enemy.HitPoints -= Damage * 2;
                 return $"Kritično si napao {enemy.Name}";
             }
-            else if (x > (100 - StunChance)) {
+            else if (x > (100 - _stunChance)) {
                 enemy.HitPoints -= Damage;
                 enemy.CanAttack = false;
-                return $"Napao i stunao si {enemy.Name}";
+                return $"Napao si i stunao {enemy.Name}";
             }
             else { 
                 enemy.HitPoints -= Damage;

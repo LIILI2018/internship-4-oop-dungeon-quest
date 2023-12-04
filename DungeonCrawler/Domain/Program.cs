@@ -1,6 +1,5 @@
 ﻿using DungeonCrawler.Domain.Enemies;
 using DungeonCrawler.Domain.Hero;
-using DungeonCrawler.Domain;
 using DungeonCrawler.Presentation;
 
 var hero = Presentation.ChooseHero();
@@ -15,36 +14,35 @@ StartGame();
 void StartGame() {
     Console.Clear();
     Presentation.WriteEnemies(enemies);
-        for (int i = 0; i < enemies.Count; i++) {
-            while (enemies[i].IsAlive() && hero.IsAlive()) {
-                Console.Clear();
-                Presentation.WriteSituation(hero, enemies[i]);
-                ExecuteAttack(hero, enemies[i], enemies);
-            }
-            if (hero.IsAlive()) {
-                hero.Progress(enemies, i);
-            }
-            else {
-                if (hero.SecondLife()) {
-                    break;
-                }
-            }
+
+    for (int i = 0; i < enemies.Count; i++) {
+        while (enemies[i].HitPoints > 0 && hero.IsAlive()) {
+            Console.Clear();
+            Presentation.WriteSituation(hero, enemies[i]);
+            ExecuteAttack(hero, enemies[i], enemies);
         }
         if (hero.IsAlive()) {
-            Presentation.WinDialogue();
+            hero.Progress(enemies, i);
         }
         else {
-            Presentation.DeathDialogue();
+            if (hero.SecondLife()) {
+                break;
+            }
         }
-
+    }
+    if (hero.IsAlive()) {
+        Presentation.WinDialogue();
+    }
+    else {
+        Presentation.DeathDialogue();
+    } 
 }
 
 static void ExecuteAttack(Hero hero, Enemy enemy, List<Enemy> enemies) {
-
     var enemyAttack = Enemy.ChooseAttack();
-    Console.WriteLine(enemyAttack + "\n");
     var playerAttack = Presentation.ChooseAttack();
     string outputText;
+
     if (playerAttack == enemyAttack) {
         outputText = "Izjednačeno";
     }
@@ -60,5 +58,6 @@ static void ExecuteAttack(Hero hero, Enemy enemy, List<Enemy> enemies) {
     else{
         outputText = enemy.AttackPlayer(hero, enemies);
     }
+
     Inputs.Wait(outputText);
 }

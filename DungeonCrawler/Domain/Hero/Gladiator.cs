@@ -1,20 +1,22 @@
 ﻿using DungeonCrawler.Domain.Enemies;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Net.Mime.MediaTypeNames;
-
 namespace DungeonCrawler.Domain.Hero {
-	public class Gladiator : Hero {
-		public Gladiator() : base("Gladiator", Utility.RandomInt(90, 100), Utility.RandomInt(10, 15), 10, 10) { }
+    //+ +
+    public class Gladiator : Hero {
+        public Gladiator() : base("Gladiator", Utility.RandomInt(90, 100), Utility.RandomInt(10, 15), 10, 10) { }
 
-		public override void AttackEnemy(Enemy enemy) {
-			enemy.HitPoints -= Damage;
-		}
-		public void RageAttack() {
-			/*TODO*/
-		}
-	}
+        //+ +
+        public override double AttackEnemy(Enemy enemy) {
+            var x = Presentation.Presentation.ChooseAttackType(this);
+            if (x == 1) {
+                enemy.HitPoints -= Damage;
+                return Damage;
+
+            }
+            else {
+                HitPoints -= 0.1 * MaxHitPoints;
+                enemy.HitPoints -= Damage * 2;
+                return Damage * 2;
+            }
+        }
+    }
 }

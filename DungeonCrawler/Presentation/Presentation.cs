@@ -1,35 +1,62 @@
 ﻿using DungeonCrawler.Domain.Enemies;
 using DungeonCrawler.Domain.Hero;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DungeonCrawler.Presentation {
-	internal class Presentation {
-		public static Hero ChooseHero() {
-			Console.WriteLine("Choose hero");
-			var x = Inputs.OptionInput(["1 - Gladiator", "2 - Enchanter", "3 - Marksman"]);
-			switch (x) {
-				case 1:
-					return new Gladiator();
-				case 2:
-					return new Enchanter();
-				default:
-					return new Marksman();
-			}
-		}
+    public static class Presentation {
+        //+ +
+        public static Hero ChooseHero() {
+            Console.WriteLine("Choose hero");
+            var x = Inputs.OptionInput(["1 - Gladiator", "2 - Enchanter", "3 - Marksman"]);
+            switch (x) {
+                case 1:
+                    Hero hero = new Gladiator();
+                    Inputs.Wait($"Odabrao si Gladijatora\n\nTvoja statistika: \nHitpoints: {hero.HitPoints} \nDamage: {hero.Damage}\nExperience: {hero.ExperiencePoints}");
+                    return hero;
+                case 2:
+                    hero = new Enchanter();
+                    Inputs.Wait($"Odabrao si Enchantera\n\nTvoja statistika: \nHitpoints: {hero.HitPoints} \nDamage: {hero.Damage}\nExperience: {hero.ExperiencePoints}");
+                    return hero;
+                default:
+                    hero = new Marksman();
+                    Inputs.Wait($"Odabrao si Mušketira\n\nTvoja statistika: \nHitpoints: {hero.HitPoints} \nDamage: {hero.Damage}\nExperience: {hero.ExperiencePoints}");
+                    return hero;
+            }
+        }
 
-		public static void WriteSituation(Hero hero, Enemy enemy) {
-            Console.WriteLine($"{hero.Name} \nHitpoints:{hero.HitPoints} \nDamage:{hero.Damage}");
+        //+ +
+        public static void WriteEnemies(List<Enemy> enemies) {
+            Console.WriteLine("Neprijatelji s kojima ćeš se boriti: ");
+            var i = 1;
+            foreach (Enemy enemy in enemies) {
+                Console.WriteLine($"{i++} {enemy.Name}");
+            }
+            Inputs.Wait("");
+        }
+
+        //+ +
+        public static void WriteSituation(Hero hero, Enemy enemy) {
+            Console.WriteLine($"{hero.Name} \nHitpoints: {hero.HitPoints}/{hero.MaxHitPoints} \nDamage: {hero.Damage}\nExperience: {hero.ExperiencePoints}/100");
             Console.WriteLine();
-            Console.WriteLine($"{enemy.Name} \nHitpoints:{enemy.HitPoints} \nDamage:{enemy.Damage}");
+            Console.WriteLine($"{enemy.Name} \nHitpoints: {enemy.HitPoints} \nDamage: {enemy.Damage}\nExperience value: {enemy.ExperienceWorth}");
             Console.WriteLine();
         }
-		public static int ChooseAttack() {
-			return Inputs.OptionInput(["1 - Direct attack", "2 - Side attack", "3 - Counter attack"]);
-		}
 
-	}
+        //+ +
+        public static int ChooseAttack() {
+            return Inputs.OptionInput(["1 - Direktan napad", "2 - Napad sa strane", "3 - Protunapad"]);
+        }
+
+        //
+        public static int ChooseAttackType(Hero hero) {
+            return Inputs.OptionInput([$"1 - Napadni normalnim napadom ({hero.Damage} dmg)", $"2 - Napadni bijesnim napadom ({hero.Damage * 2} dmg, tvoj hp će se smanjiti za {hero.MaxHitPoints * 0.1})"]);
+        }
+
+        //
+        public static void DeathDialogue() {
+            Inputs.Wait("Umro si");
+        }
+
+        //
+        public static void WinDialogue() { Console.WriteLine("Pobijedio si"); }
+    }
 }

@@ -6,53 +6,62 @@ using DungeonCrawler.Presentation;
 var hero = Presentation.ChooseHero();
 
 var enemies = new List<Enemy>();
-
-for (int i = 0; i < 3; i++) {
-	enemies.Add(Enemy.CreateEnemy());
+for (int i = 0; i < 5; i++) {
+    enemies.Add(Enemy.CreateEnemy());
 }
-foreach (Enemy enemy in enemies) { Console.WriteLine(enemy.Name); }
 
 StartGame();
 
-void StartGame() { 
-	for (int i = 0; i < enemies.Count; i++) {
-
-		while (enemies[i].IsAlive() && hero.IsAlive()) {
-			Console.Clear();
-			Presentation.WriteSituation(hero, enemies[i]);
-			ExecuteAttack(hero, enemies[i], enemies);
-		}
-		if (hero.IsAlive()) { 
-			hero.Progress(enemies, i);
-		}
-	}
+void StartGame() {
+    Console.Clear();
+    Presentation.WriteEnemies(enemies);
+    for (int i = 0; i < enemies.Count; i++) {
+        while (enemies[i].IsAlive() && hero.IsAlive()) {
+            Console.Clear();
+            Presentation.WriteSituation(hero, enemies[i]);
+            ExecuteAttack(hero, enemies[i], enemies);
+        }
+        if (hero.IsAlive()) {
+            hero.Progress(enemies, i);
+        }
+        else {
+            //
+            break;
+        }
+    }
+    if (hero.IsAlive()) {
+        Presentation.WinDialogue();
+    }
+    else {
+        Presentation.DeathDialogue();
+    }
 }
-static void ExecuteAttack( Hero hero, Enemy enemy, List<Enemy> enemies) {
 
-	var enemyAttack = Enemy.ChooseAttack();
-	Console.WriteLine(enemyAttack + "\n");
-	var playerAttack = Presentation.ChooseAttack();
+static void ExecuteAttack(Hero hero, Enemy enemy, List<Enemy> enemies) {
 
-	if (playerAttack == 1 && enemyAttack == 3) {
-		enemy.AttackPlayer(hero, enemies);
-		Inputs.Wait("You attack enemy");
-	}
-	else if (playerAttack == 3 && enemyAttack == 1) {
-		hero.AttackEnemy(enemy);
-		Inputs.Wait("Enemy attacks you");
+    var enemyAttack = Enemy.ChooseAttack();
+    Console.WriteLine(enemyAttack + "\n");
+    var playerAttack = Presentation.ChooseAttack();
 
-	}
-	else if (playerAttack < enemyAttack) {
-		hero.AttackEnemy(enemy);
-		Inputs.Wait("Enemy attacks you");
+    if (playerAttack == 3 && enemyAttack == 1) {
+        enemy.AttackPlayer(hero, enemies);
+        Inputs.Wait($"{enemy.Name} te napada");
+    }
+    else if (playerAttack == 1 && enemyAttack == 3) {
+        hero.AttackEnemy(enemy);
+        Inputs.Wait($"Napadaš {enemy.Name}");
 
-	}
-	else if (playerAttack > enemyAttack) {
-		enemy.AttackPlayer(hero, enemies);
-		Inputs.Wait("You attack enemy");
+    }
+    else if (playerAttack < enemyAttack) {
+        hero.AttackEnemy(enemy);
+        Inputs.Wait($"Napadaš {enemy.Name}");
 
-	}
-	else {
-		Inputs.Wait("Stalemate");
-	}
+    }
+    else if (playerAttack > enemyAttack) {
+        enemy.AttackPlayer(hero, enemies);
+        Inputs.Wait($"{enemy.Name} te napada");
+    }
+    else {
+        Inputs.Wait("Izjednačeno");
+    }
 }

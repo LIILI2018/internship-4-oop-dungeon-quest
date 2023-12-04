@@ -20,7 +20,7 @@ namespace DungeonCrawler.Domain.Enemies {
 
 
 
-        public virtual void AttackPlayer(Hero.Hero hero1, List<Enemy> enemies) { }
+        public virtual string AttackPlayer(Hero.Hero hero1, List<Enemy> enemies) { return ""; }
         public bool IsAlive() {
             if (HitPoints > 0) return true;
             else return false;

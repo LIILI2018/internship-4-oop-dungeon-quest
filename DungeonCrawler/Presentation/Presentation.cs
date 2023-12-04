@@ -36,9 +36,6 @@ namespace DungeonCrawler.Presentation {
         //+ +
         public static void WriteSituation(Hero hero, Enemy enemy) {
             Console.WriteLine($"{hero.Name} \nHitpoints: {hero.HitPoints}/{hero.MaxHitPoints} \nDamage: {hero.Damage}\nExperience: {hero.ExperiencePoints}/100");
-            /*if (hero.Name == "Enchanter") {
-                Console.WriteLine($"Mana: {hero.Mana}/{hero.MaxMana}");
-            }*/
             Console.WriteLine();
             Console.WriteLine($"{enemy.Name} \nHitpoints: {enemy.HitPoints} \nDamage: {enemy.Damage}\nExperience value: {enemy.ExperienceWorth}");
             Console.WriteLine();
@@ -56,5 +53,6 @@ namespace DungeonCrawler.Presentation {
 
         //
         public static void WinDialogue() { Console.WriteLine("Pobijedio si"); }
+        //+ +
     }
 }

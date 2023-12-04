@@ -1,28 +1,26 @@
 ﻿using DungeonCrawler.Presentation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DungeonCrawler.Domain.Enemies {
     public class Witch : Enemy {
         public Witch() : base("Witch", Utility.RandomInt(15, 20), 40, Utility.RandomInt(30, 40)) { }
-        public override void AttackPlayer(Hero.Hero hero, List<Enemy> enemies) {
+        public override string AttackPlayer(Hero.Hero hero, List<Enemy> enemies) {
             if (CanAttack) {
                 if (Utility.RandomInt() <= 10) {
-                    Inputs.Wait("Vještica igra đumbus");
                     foreach (var enemy in enemies) {
                         enemy.HitPoints *= Utility.RandomInt(60, 101);
                     }
-                hero.HitPoints *= Utility.RandomInt(60, 101);
+                    hero.HitPoints *= Utility.RandomInt(60, 101);
+                    return "Vještica napada sa đumbusom";
+
                 }
                 else {
                     hero.HitPoints -= Damage;
+                    return "Vještica te napada";
                 }
             }
             else {
-                Console.WriteLine("Ne može napasti");
+                CanAttack = true;
+                return "Vještica te ne može napasti";
             }
         }
         public override void EnemyDeath(List<Enemy> enemies) {

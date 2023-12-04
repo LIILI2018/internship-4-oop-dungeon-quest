@@ -3,12 +3,14 @@
 namespace DungeonCrawler.Domain.Enemies {
     public class Goblin : Enemy {
         public Goblin() : base("Goblin", Utility.RandomInt(15, 20), 100, Utility.RandomInt(30, 40)) { }
-        public override void AttackPlayer(Hero.Hero hero, List<Enemy> enemies) {
+        public override string AttackPlayer(Hero.Hero hero, List<Enemy> enemies) {
             if (CanAttack) {
                 hero.HitPoints -= Damage;
+                return "Goblin te napao";
             }
             else {
-                Console.WriteLine("Ne može napasti");
+                CanAttack = true;
+                return "Goblin te ne može napasti";
             }
         }
     }

@@ -24,14 +24,15 @@ namespace DungeonCrawler.Domain.Hero {
         }
 
         //
-        public virtual void AttackEnemy(Enemy enemy) {}
+        public virtual string AttackEnemy(Enemy enemy) { return ""; }
 
+        //+ +
         public virtual void LevelUp() {
-            if (ExperiencePoints > 100) {
+            if (ExperiencePoints >= 100) {
                 MaxHitPoints += MaxHPIncrease;
                 Damage += DamageIncrease;
                 ExperiencePoints -= 100;
-                Inputs.Wait($"Postigao si novi level\n HP ti se povečao za {MaxHPIncrease}\n Damage ti se povečao za {DamageIncrease}");
+                Inputs.Wait($"Postigao si novi level\nHP ti se povečao za {MaxHPIncrease}\nDamage ti se povečao za {DamageIncrease}");
             }
         }
 

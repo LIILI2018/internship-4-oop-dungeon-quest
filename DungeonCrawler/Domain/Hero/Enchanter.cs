@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DungeonCrawler.Domain.Hero {
     public class Enchanter : Hero {
-        public double Mana { get; set; }
+        public double Mana { get; set; } = 100;
         public double MaxMana { get; set; } = 100;
         private bool CanReturnFromDead { get; set; } = true;
         public Enchanter() : base("Enchanter", Utility.RandomInt(50, 60), Utility.RandomInt(40, 50), 10, 10) { }
@@ -28,21 +28,25 @@ namespace DungeonCrawler.Domain.Hero {
             }
         }
 
-        public override void AttackEnemy(Enemy enemy) {
+        public override string AttackEnemy(Enemy enemy) {
             if  (Mana > 0) { 
                 var x = Inputs.OptionInput([$"1 - Napadni normalnim napadom ({Damage} dmg)", $"2 - Obnovi život (+{MaxHPIncrease * 0.4} HP, -{MaxMana * 0.5} Mana)"]);    
                 if (x == 1) {
                     Mana -= 10;
                     enemy.HitPoints -= Damage;
+                    return $"Napao si {enemy.Name}a";
+
                 }
                 else {
                     Mana -= MaxMana * 0.5;
                     HitPoints += MaxHPIncrease * 0.4;
+                    return $"Healao si se";
+
                 }
             }
             else {
-                Inputs.Wait("Ne možeš napasti ovaj krug jer nemaš mane");
                 Mana += MaxMana * 0.5;
+                return $"Ne možeš napasti ovaj krug jer nemaš mane";
             }
         }
         public override bool Death() {

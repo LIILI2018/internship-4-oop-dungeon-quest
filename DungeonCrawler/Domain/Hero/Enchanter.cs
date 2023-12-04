@@ -16,13 +16,13 @@ namespace DungeonCrawler.Domain.Hero {
         protected override void LevelUp() {
             base.LevelUp();
             if (ExperiencePoints > 100) {
-                MaxMana += 10;
+                MaxMana += 20;
             }
         }
 
         public override string AttackEnemy(Enemy enemy) {
             if  (Mana > 0) { 
-                var x = Inputs.OptionInput([$"1 - Napadni normalnim napadom ({Damage} dmg)", $"2 - Obnovi život (+{_maxHPIncrease * 0.4} HP, -{MaxMana * 0.5} Mana)"]);    
+                var x = Inputs.OptionInput([$"1 - Napadni normalnim napadom ({Damage} dmg)", $"2 - Obnovi život (+{_maxHPIncrease * 0.25} HP, -{MaxMana * 0.5} Mana)"]);    
                 if (x == 1) {
                     Mana -= 10;
                     enemy.HitPoints -= Damage;
@@ -30,7 +30,7 @@ namespace DungeonCrawler.Domain.Hero {
                 }
                 else {
                     Mana -= MaxMana * 0.5;
-                    HitPoints += _maxHPIncrease * 0.4;
+                    Heal();
                     return $"Healao si se";
                 }
             }

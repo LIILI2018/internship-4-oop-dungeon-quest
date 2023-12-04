@@ -2,14 +2,15 @@
 
 namespace DungeonCrawler.Domain.Enemies {
     public class Witch : Enemy {
-        public Witch() : base("Vještica", Utility.RandomInt(50,60), 70, Utility.RandomInt(25, 35)) { }
+        public Witch() : base("Vještica", Utility.RandomInt(50,60), 60, Utility.RandomInt(25, 35)) { }
         public override string AttackPlayer(Hero.Hero hero, List<Enemy> enemies) {
             if (CanAttack) {
-                if (Utility.RandomInt() <= 10) {
+                if (Utility.RandomInt() <= 100) {
                     foreach (var enemy in enemies) {
-                        enemy.HitPoints *= Utility.RandomInt(60, 101)/100;
+                        enemy.HitPoints *= Utility.RandomDouble(60, 101)/100;
                     }
-                    hero.HitPoints *= Utility.RandomInt(60, 101)/100;
+                    var x = Utility.RandomDouble(60, 101) / 100;
+                    hero.HitPoints *= x;
                     return "Vještica napada sa đumbusom";
                 }
                 else {

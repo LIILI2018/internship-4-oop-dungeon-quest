@@ -5,7 +5,7 @@ using DungeonCrawler.Presentation;
 var hero = Presentation.ChooseHero();
 
 var enemies = new List<Enemy>();
-for (int i = 0; i < 5; i++) {
+for (int i = 0; i < 10; i++) {
     enemies.Add(Enemy.CreateEnemy());
 }
 

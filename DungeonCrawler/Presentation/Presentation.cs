@@ -4,7 +4,7 @@ using DungeonCrawler.Domain.Hero;
 namespace DungeonCrawler.Presentation {
     public static class Presentation {
         public static Hero ChooseHero() {
-            Console.WriteLine("Choose hero");
+            Console.WriteLine("Odaberi heroja");
             var x = Inputs.OptionInput(["1 - Gladiator", "2 - Enchanter", "3 - Marksman"]);
             switch (x) {
                 case 1:

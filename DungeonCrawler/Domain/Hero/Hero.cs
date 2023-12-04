@@ -38,7 +38,7 @@ namespace DungeonCrawler.Domain.Hero {
         }
 
         protected virtual void Heal() {
-            HitPoints += MaxHitPoints * 0.4;
+            HitPoints += MaxHitPoints * 0.25;
             if (HitPoints > MaxHitPoints) {
                 HitPoints = MaxHitPoints;
             }
@@ -46,9 +46,17 @@ namespace DungeonCrawler.Domain.Hero {
 
         public void Progress(List<Enemy> enemies, int i) {
             ExperiencePoints += enemies[i].ExperienceWorth;
+            enemies[i].EnemyDeath(enemies);
             LevelUp();
             Heal();
-            enemies[i].EnemyDeath(enemies);
+            RegenerateAfterBattle();               
+        }
+        private void RegenerateAfterBattle() {
+            var x = Inputs.OptionInput([$"1 - Obnovi život (+{_maxHPIncrease * 0.25} HP)", $"2 - Obnovi život u potpunosti ({_maxHPIncrease}HP, -{ExperiencePoints/2}EXP)"]);
+            if (x == 2) {
+                ExperiencePoints /= 2;
+                HitPoints = MaxHitPoints;
+            }
         }
         public virtual bool SecondLife() { return false; }
     }

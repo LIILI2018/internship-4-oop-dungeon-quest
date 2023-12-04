@@ -3,7 +3,7 @@ using DungeonCrawler.Domain.Hero;
 using DungeonCrawler.Domain;
 using DungeonCrawler.Presentation;
 
-var hero = new Enchanter();//Presentation.ChooseHero();
+var hero = Presentation.ChooseHero();
 
 var enemies = new List<Enemy>();
 for (int i = 0; i < 5; i++) {
@@ -25,7 +25,7 @@ void StartGame() {
                 hero.Progress(enemies, i);
             }
             else {
-                if (hero.Death()) {
+                if (hero.SecondLife()) {
                     break;
                 }
             }
@@ -39,26 +39,26 @@ void StartGame() {
 
 }
 
-static void ExecuteAttack(Enchanter hero, Enemy enemy, List<Enemy> enemies) {
+static void ExecuteAttack(Hero hero, Enemy enemy, List<Enemy> enemies) {
 
     var enemyAttack = Enemy.ChooseAttack();
     Console.WriteLine(enemyAttack + "\n");
     var playerAttack = Presentation.ChooseAttack();
     string outputText;
-    if (playerAttack == 3 && enemyAttack == 1) {
-        outputText = enemy.AttackPlayer(hero, enemies);
+    if (playerAttack == enemyAttack) {
+        outputText = "Izjednačeno";
     }
     else if (playerAttack == 1 && enemyAttack == 3) {
+        outputText = enemy.AttackPlayer(hero, enemies);
+    }
+    else if (playerAttack == 3 && enemyAttack == 1) {
         outputText = hero.AttackEnemy(enemy);
     }
     else if (playerAttack < enemyAttack) {
         outputText = hero.AttackEnemy(enemy);
     }
-    else if (playerAttack > enemyAttack) {
+    else{
         outputText = enemy.AttackPlayer(hero, enemies);
-    }
-    else {
-        outputText = "Izjednačeno";
     }
     Inputs.Wait(outputText);
 }

@@ -9,23 +9,23 @@ using System.Threading.Tasks;
 namespace DungeonCrawler.Domain.Hero {
     public class Marksman : Hero {
         public double CritcalChance { get; set; } = 20;
-        public double StunChance { get; set; } = 20;
-        public Marksman() : base("Marksman", Utility.RandomInt(45, 55), Utility.RandomInt(45, 55), 10, 10) { }
+        public double StunChance { get; set; } = 30;
+        public Marksman() : base("Mušketir", Utility.RandomInt(45, 55), Utility.RandomInt(20, 30), 10, 10) { }
 
         public override string AttackEnemy(Enemy enemy) {
             var x = Utility.RandomInt();
             if (x < CritcalChance) {
                 enemy.HitPoints -= Damage * 2;
-                return $"Kritično si napao {enemy.Name}a";
+                return $"Kritično si napao {enemy.Name}";
             }
-            else if (x > 100 - StunChance) {
+            else if (x > (100 - StunChance)) {
                 enemy.HitPoints -= Damage;
                 enemy.CanAttack = false;
-                return $"Napao i stunao si {enemy.Name}a";
+                return $"Napao i stunao si {enemy.Name}";
             }
             else { 
                 enemy.HitPoints -= Damage;
-                return $"Napao si {enemy.Name}a";
+                return $"Napao si {enemy.Name}";
             }
         }
     }

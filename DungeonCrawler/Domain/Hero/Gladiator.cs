@@ -3,7 +3,7 @@ using DungeonCrawler.Presentation;
 namespace DungeonCrawler.Domain.Hero {
     //+ +
     public class Gladiator : Hero {
-        public Gladiator() : base("Gladiator", Utility.RandomInt(90, 100), Utility.RandomInt(10, 15), 10, 10) { }
+        public Gladiator() : base("Gladiator", Utility.RandomInt(180, 200), Utility.RandomInt(10, 15), 20, 10) { }
 
         //+ +
         public override string AttackEnemy(Enemy enemy) {

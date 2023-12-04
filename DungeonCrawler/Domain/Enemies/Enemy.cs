@@ -1,4 +1,5 @@
 ﻿using DungeonCrawler.Domain.Hero;
+using DungeonCrawler.Presentation;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -40,7 +41,10 @@ namespace DungeonCrawler.Domain.Enemies {
         public static int ChooseAttack() {
             return Utility.RandomInt(1, 4);
         }
-        public virtual void EnemyDeath(List<Enemy> enemies) { }
+        public virtual void EnemyDeath(List<Enemy> enemies) {
+            HitPoints = 0;
+            Inputs.Wait("Ubio si " + Name +"a");
+        }
 
     }
 }

@@ -2,16 +2,17 @@
 using DungeonCrawler.Domain.Hero;
 using DungeonCrawler.Presentation;
 
-var hero = Presentation.ChooseHero();
 
-var enemies = new List<Enemy>();
-for (int i = 0; i < 10; i++) {
-    enemies.Add(Enemy.CreateEnemy());
-}
 
 StartGame();
 
 void StartGame() {
+        var hero = Presentation.ChooseHero();
+
+    var enemies = new List<Enemy>();
+    for (int i = 0; i < 10; i++) {
+        enemies.Add(Enemy.CreateEnemy());
+    }
     Console.Clear();
     Presentation.WriteEnemies(enemies);
 
@@ -34,7 +35,9 @@ void StartGame() {
         Presentation.WinDialogue();
     }
     else {
-        Presentation.DeathDialogue();
+        if (Presentation.DeathDialogue()) {
+            StartGame();
+        }
     } 
 }
 

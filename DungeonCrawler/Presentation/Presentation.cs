@@ -1,4 +1,5 @@
-﻿using DungeonCrawler.Domain.Enemies;
+﻿using DungeonCrawler.Domain;
+using DungeonCrawler.Domain.Enemies;
 using DungeonCrawler.Domain.Hero;
 
 namespace DungeonCrawler.Presentation {
@@ -42,10 +43,11 @@ namespace DungeonCrawler.Presentation {
             return Inputs.OptionInput(["1 - Direktan napad", "2 - Napad sa strane", "3 - Protunapad"]);
         }
 
-        public static void DeathDialogue() {
+        public static bool DeathDialogue() {
             Inputs.Wait("Umro si");
+            return Utility.PlayAgain();
         }
 
-        public static void WinDialogue() { Console.WriteLine("Pobijedio si"); }
+        public static void WinDialogue() { Console.WriteLine("Pobijedio si sve neprijatelje\nSada možeš dobiti osloboditi princezu iz kule..."); }
     }
 }

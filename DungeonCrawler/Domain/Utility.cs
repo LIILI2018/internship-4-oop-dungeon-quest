@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DungeonCrawler.Presentation;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,5 +16,12 @@ namespace DungeonCrawler.Domain {
         public static double RandomDouble(int low, int high) {
             return new Random().Next(low, high);
         }
+		public static bool PlayAgain() {
+			var x = Inputs.OptionInput(["1 - Želiš igrati ponovo","2 - Završi program"]);
+			if (x == 1) {
+				return true;
+			}
+			return false;
+		}
     }
 }

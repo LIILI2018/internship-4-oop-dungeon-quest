@@ -1,6 +1,6 @@
 ﻿namespace DungeonCrawler.Domain.Enemies {
     internal class Brute : Enemy {
-        public Brute() : base("Brute", Utility.RandomInt(80, 100), 40, Utility.RandomInt(35, 45)) { }
+        public Brute() : base("Brute", Utility.RandomInt(80, 110), 40, Utility.RandomInt(30, 40)) { }
         public override string AttackPlayer(Hero.Hero hero, List<Enemy> enemies) {
             if (CanAttack) {
                 if (Utility.RandomInt() <= 30) {

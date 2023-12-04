@@ -3,7 +3,7 @@ using DungeonCrawler.Presentation;
 
 namespace DungeonCrawler.Domain.Hero {
     public class Gladiator : Hero {
-        public Gladiator() : base("Gladiator", Utility.RandomInt(180, 200), Utility.RandomInt(20, 25), 30, 10) { }
+        public Gladiator() : base("Gladiator", Utility.RandomInt(120, 150), Utility.RandomInt(20, 25), 30, 10) { }
         public override string AttackEnemy(Enemy enemy) {
             var x = Inputs.OptionInput([$"1 - Napadni normalnim napadom ({Damage} dmg)", $"2 - Napadni bijesnim napadom ({Damage * 2} dmg,-{MaxHitPoints * 0.15} HP)"]);
             if (x == 1) {
@@ -12,7 +12,7 @@ namespace DungeonCrawler.Domain.Hero {
             }
             else {
                 HitPoints -= 0.15 * MaxHitPoints;
-                enemy.HitPoints -= Damage * 5;
+                enemy.HitPoints -= Damage * 2;
                 return $"Bijesno si napao {enemy.Name}";
             }
         }

@@ -5,7 +5,7 @@ namespace DungeonCrawler.Domain.Enemies {
         public Witch() : base("Vještica", Utility.RandomInt(50,60), 60, Utility.RandomInt(25, 35)) { }
         public override string AttackPlayer(Hero.Hero hero, List<Enemy> enemies) {
             if (CanAttack) {
-                if (Utility.RandomInt() <= 100) {
+                if (Utility.RandomInt() <= 20) {
                     foreach (var enemy in enemies) {
                         enemy.HitPoints *= Utility.RandomDouble(60, 101)/100;
                     }

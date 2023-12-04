@@ -10,7 +10,7 @@ namespace DungeonCrawler.Domain.Enemies {
         public double HitPoints { get; set; }
         public double ExperienceWorth { get; set; }
         public double Damage { get; set; }
-
+        public bool CanAttack { get; set; } = true;
         public Enemy(string name, double HP, double XPW, double damage) {
             Name = name;
             HitPoints = HP;

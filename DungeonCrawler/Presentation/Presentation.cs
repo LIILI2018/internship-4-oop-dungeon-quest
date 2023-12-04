@@ -36,6 +36,9 @@ namespace DungeonCrawler.Presentation {
         //+ +
         public static void WriteSituation(Hero hero, Enemy enemy) {
             Console.WriteLine($"{hero.Name} \nHitpoints: {hero.HitPoints}/{hero.MaxHitPoints} \nDamage: {hero.Damage}\nExperience: {hero.ExperiencePoints}/100");
+            /*if (hero.Name == "Enchanter") {
+                Console.WriteLine($"Mana: {hero.Mana}/{hero.MaxMana}");
+            }*/
             Console.WriteLine();
             Console.WriteLine($"{enemy.Name} \nHitpoints: {enemy.HitPoints} \nDamage: {enemy.Damage}\nExperience value: {enemy.ExperienceWorth}");
             Console.WriteLine();
@@ -44,11 +47,6 @@ namespace DungeonCrawler.Presentation {
         //+ +
         public static int ChooseAttack() {
             return Inputs.OptionInput(["1 - Direktan napad", "2 - Napad sa strane", "3 - Protunapad"]);
-        }
-
-        //
-        public static int ChooseAttackType(Hero hero) {
-            return Inputs.OptionInput([$"1 - Napadni normalnim napadom ({hero.Damage} dmg)", $"2 - Napadni bijesnim napadom ({hero.Damage * 2} dmg, tvoj hp će se smanjiti za {hero.MaxHitPoints * 0.1})"]);
         }
 
         //

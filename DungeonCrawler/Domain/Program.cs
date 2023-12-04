@@ -15,26 +15,28 @@ StartGame();
 void StartGame() {
     Console.Clear();
     Presentation.WriteEnemies(enemies);
-    for (int i = 0; i < enemies.Count; i++) {
-        while (enemies[i].IsAlive() && hero.IsAlive()) {
-            Console.Clear();
-            Presentation.WriteSituation(hero, enemies[i]);
-            ExecuteAttack(hero, enemies[i], enemies);
+        for (int i = 0; i < enemies.Count; i++) {
+            while (enemies[i].IsAlive() && hero.IsAlive()) {
+                Console.Clear();
+                Presentation.WriteSituation(hero, enemies[i]);
+                ExecuteAttack(hero, enemies[i], enemies);
+            }
+            if (hero.IsAlive()) {
+                hero.Progress(enemies, i);
+            }
+            else {
+                if (hero.Death()) {
+                    break;
+                }
+            }
         }
         if (hero.IsAlive()) {
-            hero.Progress(enemies, i);
+            Presentation.WinDialogue();
         }
         else {
-            //
-            break;
+            Presentation.DeathDialogue();
         }
-    }
-    if (hero.IsAlive()) {
-        Presentation.WinDialogue();
-    }
-    else {
-        Presentation.DeathDialogue();
-    }
+
 }
 
 static void ExecuteAttack(Hero hero, Enemy enemy, List<Enemy> enemies) {

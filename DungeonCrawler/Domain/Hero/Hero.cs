@@ -24,9 +24,9 @@ namespace DungeonCrawler.Domain.Hero {
         }
 
         //
-        public virtual double AttackEnemy(Enemy enemy) { return 0; }
+        public virtual void AttackEnemy(Enemy enemy) {}
 
-        public void LevelUp() {
+        public virtual void LevelUp() {
             if (ExperiencePoints > 100) {
                 MaxHitPoints += MaxHPIncrease;
                 Damage += DamageIncrease;
@@ -39,7 +39,7 @@ namespace DungeonCrawler.Domain.Hero {
             if (HitPoints > 0) return true;
             else return false;
         }
-        public void Heal() {
+        public virtual void Heal() {
             HitPoints += MaxHitPoints * 0.25;
             if (HitPoints > MaxHitPoints) {
                 HitPoints = MaxHitPoints;
@@ -52,5 +52,6 @@ namespace DungeonCrawler.Domain.Hero {
             Heal();
             enemies[i].EnemyDeath(enemies);
         }
+        public virtual bool Death() { return false; }
     }
 }
